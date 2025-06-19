@@ -52,11 +52,10 @@ namespace MendAndRecycle
                 if (objectThing == null || objectThing.Destroyed) {
                     pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
                 }
-
                 workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
 
                 tableThing.UsedThisTick ();
-
+                pawn.GainComfortFromCellIfPossible(1);
                 if (! (tableThing.CurrentlyUsableForBills() && (refuelableComp == null || refuelableComp.HasFuel)) ) {
                     pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
                 }
@@ -86,8 +85,6 @@ namespace MendAndRecycle
 
                         MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Failed");
                     }
-
-                    pawn.GainComfortFromCellIfPossible ();
 
                     if (objectThing.HitPoints <= 0) {
                         // recycling whats left...

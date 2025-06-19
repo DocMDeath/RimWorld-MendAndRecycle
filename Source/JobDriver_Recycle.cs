@@ -48,7 +48,7 @@ namespace MendAndRecycle
                 }
 
                 workCycleProgress -= StatExtension.GetStatValue (pawn, StatDefOf.WorkToMake, true);
-
+                pawn.GainComfortFromCellIfPossible(1);
                 tableThing.UsedThisTick ();
                 if (!tableThing.CurrentlyUsableForBills()) {
                     pawn.jobs.EndCurrentJob (JobCondition.Incompletable);
@@ -82,8 +82,6 @@ namespace MendAndRecycle
 
                         MoteMaker.ThrowText(pawn.DrawPos, pawn.Map, "Failed");
                     }
-
-                    pawn.GainComfortFromCellIfPossible ();
 
                     if (objectThing.HitPoints <= 0) {
                         pawn.Map.reservationManager.Release (job.targetB, pawn, job);
